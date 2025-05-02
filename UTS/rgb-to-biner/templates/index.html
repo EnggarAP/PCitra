@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konversi RGB ke Biner</title>
+</head>
+<body>
+    <h1>Upload Gambar RGB</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <button type="submit">Konversi</button>
+    </form>
+
+    {% if original_image %}
+        <h2>Gambar Asli:</h2>
+        <img src="{{ url_for('static', filename=original_image.split('static/')[1]) }}" width="300">
+
+        <h2>Gambar Biner:</h2>
+        <img src="{{ url_for('static', filename=result_image.split('static/')[1]) }}" width="300">
+    {% endif %}
+</body>
+</html>
