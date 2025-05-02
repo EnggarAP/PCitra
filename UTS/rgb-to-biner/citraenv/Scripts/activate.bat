@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\MATERI KULIAH\Semester 6\Pengolahan Citra\rgb-to-biner\citraenv
+set VIRTUAL_ENV=D:\MATERI KULIAH\Semester 6\Pengolahan Citra\PCitra\UTS\rgb-to-biner\citraenv
 
 if not defined PROMPT set PROMPT=$P$G
 

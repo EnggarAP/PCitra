@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\MATERI KULIAH\Semester 6\Pengolahan Citra\rgb-to-biner\citraenv"
+VIRTUAL_ENV="D:\MATERI KULIAH\Semester 6\Pengolahan Citra\PCitra\UTS\rgb-to-biner\citraenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

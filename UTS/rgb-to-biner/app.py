@@ -3,8 +3,8 @@ from PIL import Image
 import os
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'static/uploads'
-RESULT_FOLDER = 'static/results'
+UPLOAD_FOLDER = 'static/uploads/'
+RESULT_FOLDER = 'static/results/'
 
 # Pastikan folder ada
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)

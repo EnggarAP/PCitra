@@ -1,21 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
     <title>Konversi RGB ke Biner</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom right, #a8edea, #fed6e3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #005f73;
+        }
+
+        input[type="file"] {
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #0077b6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #023e8a;
+        }
+
+        img {
+            margin-top: 10px;
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload Gambar RGB</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" required>
-        <button type="submit">Konversi</button>
-    </form>
+    <div class="container">
+        <h1>Aplikasi Konversi RGB ke Biner</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" required><br>
+            <button type="submit">Konversi</button>
+        </form>
 
-    {% if original_image %}
-        <h2>Gambar Asli:</h2>
-        <img src="{{ url_for('static', filename=original_image.split('static/')[1]) }}" width="300">
+        {% if original_image %}
+            <h2>Gambar Asli:</h2>
+            <img src="{{ url_for('static', filename=original_image.split('static/')[1]) }}" alt="Gambar Asli">
 
-        <h2>Gambar Biner:</h2>
-        <img src="{{ url_for('static', filename=result_image.split('static/')[1]) }}" width="300">
-    {% endif %}
+            <h2>Gambar Biner:</h2>
+            <img src="{{ url_for('static', filename=result_image.split('static/')[1]) }}" alt="Gambar Biner">
+        {% endif %}
+    </div>
 </body>
 </html>
