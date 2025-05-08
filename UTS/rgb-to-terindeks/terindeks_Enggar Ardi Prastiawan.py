@@ -63,6 +63,7 @@ class IndexedImageApp:
                 idx = dists.index(min(dists))
                 clusters[idx].append(p)
 
+
             new_centroids = []
             for cluster in clusters:
                 if cluster:
@@ -91,33 +92,56 @@ class IndexedImageApp:
             return
 
         scale = 1 if self.width > 200 else 2
-        total_width = self.width * scale * 2
+        offset_x = self.width * scale
+        palette_width = 40  # lebar area palet warna
+        total_width = self.width * scale * 2 + palette_width
         self.canvas.config(width=total_width, height=self.height * scale)
 
+        # Tampilkan gambar asli
         for y in range(self.height):
             for x in range(self.width):
                 i = y * self.width + x
                 r, g, b = self.original_pixels[i]
                 color = f'#{r:02x}{g:02x}{b:02x}'
                 self.canvas.create_rectangle(
-                    x*scale, y*scale, (x+1)*scale, (y+1)*scale,
+                    x * scale, y * scale, (x + 1) * scale, (y + 1) * scale,
                     fill=color, outline=color
                 )
 
+         # Tampilkan gambar terindeks
         if self.indexed_pixels:
             for y in range(self.height):
                 for x in range(self.width):
                     i = y * self.width + x
                     r, g, b = self.indexed_pixels[i]
                     color = f'#{r:02x}{g:02x}{b:02x}'
-                    offset = self.width * scale
                     self.canvas.create_rectangle(
-                        (x*scale + offset), y*scale,
-                        (x+1)*scale + offset, (y+1)*scale,
-                        fill=color, outline=color
+                    (x * scale + offset_x), y * scale,
+                    (x + 1) * scale + offset_x, (y + 1) * scale,
+                    fill=color, outline=color
                     )
 
+        # Tampilkan indikator warna
+        unique_colors = list({p for p in self.indexed_pixels})
+        box_size = 20
+        for i, (r, g, b) in enumerate(unique_colors):
+            color = f'#{r:02x}{g:02x}{b:02x}'
+            y = i * (box_size + 2)
+            self.canvas.create_rectangle(
+                offset_x * 2 + 10, y,
+                offset_x * 2 + 10 + box_size, y + box_size,
+                fill=color, outline="black"
+            )
+            # Tambahkan label RGB
+            self.canvas.create_text(
+                offset_x * 2 + 10 + box_size + 5, y + box_size / 2,
+                anchor='w',
+                text=f"({r},{g},{b})",
+                font=("Arial", 8)
+            )
+
         self.root.title(f"Citra Terindeks - {title}")
+
 
     def save_indexed_image(self):
         if not self.indexed_image:
