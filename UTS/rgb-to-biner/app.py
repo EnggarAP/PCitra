@@ -10,7 +10,7 @@ RESULT_FOLDER = 'static/results/'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(RESULT_FOLDER, exist_ok=True)
 
-# Konversi RGB ke Grayscale → Biner manual
+# Konversi RGB ke Grayscale ==> Biner manual
 def convert_image_to_binary(image_path, result_path, threshold=127):
     image = Image.open(image_path).convert('RGB')
     width, height = image.size
@@ -29,12 +29,15 @@ def convert_image_to_binary(image_path, result_path, threshold=127):
 def index():
     if request.method == 'POST':
         uploaded_file = request.files['image']
+        threshold = int(request.form['threshold']) # Ambil input threshold
+        
         if uploaded_file.filename != '':
             input_path = os.path.join(UPLOAD_FOLDER, uploaded_file.filename)
             result_path = os.path.join(RESULT_FOLDER, 'binary_' + uploaded_file.filename)
             uploaded_file.save(input_path)
 
-            convert_image_to_binary(input_path, result_path)
+            # Panggil fungsi dengan threshold dari user
+            convert_image_to_binary(input_path, result_path, threshold)
 
             return render_template('index.html',
                                    original_image=input_path,
